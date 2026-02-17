@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Lottie from "lottie-react";
 import { useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
-// Animation de base pour l'apparition des sections
+
 const fadeInVariant = {
   hidden: { opacity: 0, y: 30 },
   visible: { 
@@ -16,7 +16,7 @@ const fadeInVariant = {
 function Navbar() {
   const navLinks = [
     { name: "Accueil", id: "accueil" },
-    { name: "Curriculum Vitae", id: "cv" }, // Le nom est long, l'ID est court
+    { name: "Curriculum Vitae", id: "cv" }, 
     { name: "Projets", id: "projets" },
     { name: "Compétences", id: "compétences" },
     { name: "Contact", id: "contact" }
@@ -48,14 +48,14 @@ function Navbar() {
 }
 
 function Hero() {
-  // Configuration des variantes pour un fondu très doux
+  
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.3, // Délai entre chaque élément (badge -> titre -> texte)
-        delayChildren: 0.5,   // Attente initiale avant de commencer le fondu
+        staggerChildren: 0.3, 
+        delayChildren: 0.5,   
       }
     }
   };
@@ -66,7 +66,7 @@ function Hero() {
       opacity: 1, 
       y: 0,
       transition: { 
-        duration: 1.2, // Durée du fondu (1.2 seconde pour que ce soit bien visible)
+        duration: 1.2, 
         ease: "easeOut" 
       }
     }
@@ -157,7 +157,7 @@ function Projects() {
         "/img/dentalcare_detail3.png",
         "/img/dentalcare_rdv1.png",
         "/img/dentalcare_rdv2.png"
-      ] // À ajouter dans public/img/
+      ] 
     },
     {
       title: "Plateforme Démocratie Participative",
@@ -167,7 +167,7 @@ function Projects() {
       tech: ["Java", "Spring", "JSON", "Architecture REST"],
       images: ["/img/demo1.png",
         "/img/demo2.png"
-      ] // À ajouter dans public/img/
+      ] 
     },
     {
       title: "Développeur logiciel / jeu vidéo",
@@ -178,7 +178,7 @@ function Projects() {
       images: ["/img/godot1.png",
         "/img/godot2.png",
         "/img/godot3.png"
-      ] // À ajouter dans public/img/
+      ] 
     },
     {
       title: "Administrateur systèmes & réseaux",
@@ -186,7 +186,7 @@ function Projects() {
       description: "Configuration complète de réseaux informatiques sous Linux.",
       details: "Mise en place de services critiques (DHCP, DNS, SSH, NAT, VLAN). Gestion de la sécurité, du routage et de l'interconnexion des réseaux.",
       tech: ["DHCP", "DNS", "SSH", "NAT", "VLAN"],
-      images: ["/img/marionnet-screen.png"] // À ajouter dans public/img/
+      images: ["/img/marionnet-screen.png"]
     }
   ];
 
@@ -492,13 +492,13 @@ function CVPreview() {
 function Contact() {
   const form = useRef();
   const [isSending, setIsSending] = useState(false);
-  const [status, setStatus] = useState(null); // 'success' ou 'error'
+  const [status, setStatus] = useState(null); 
 
   const sendEmail = (e) => {
     e.preventDefault();
     setIsSending(true);
 
-    // REMPLACE CES 3 VALEURS PAR LES TIENNES DANS TON DASHBOARD EMAILJS
+    
     const SERVICE_ID = "service_g714cio";
     const TEMPLATE_ID = "template_ho9njel";
     const PUBLIC_KEY = "woYUxsXrl-WWzulhq";
@@ -507,14 +507,14 @@ function Contact() {
       .then((result) => {
           console.log(result.text);
           setStatus('success');
-          form.current.reset(); // Vide le formulaire
+          form.current.reset();
       }, (error) => {
           console.log(error.text);
           setStatus('error');
       })
       .finally(() => {
           setIsSending(false);
-          // Efface le message de statut après 5 secondes
+          
           setTimeout(() => setStatus(null), 5000);
       });
   };
@@ -571,7 +571,7 @@ function Contact() {
                 <div className="space-y-2">
                   <label className="text-[10px] uppercase tracking-[0.2em] text-blue-400 font-bold ml-1">Nom</label>
                   <input 
-                    name="user_name" // Important pour EmailJS
+                    name="user_name"
                     required
                     type="text" 
                     placeholder="Votre nom" 
@@ -581,7 +581,7 @@ function Contact() {
                 <div className="space-y-2">
                   <label className="text-[10px] uppercase tracking-[0.2em] text-blue-400 font-bold ml-1">Email</label>
                   <input 
-                    name="user_email" // Important pour EmailJS
+                    name="user_email" 
                     required
                     type="email" 
                     placeholder="votre@email.com" 
@@ -592,7 +592,7 @@ function Contact() {
               <div className="space-y-2">
                 <label className="text-[10px] uppercase tracking-[0.2em] text-blue-400 font-bold ml-1">Message</label>
                 <textarea 
-                  name="message" // Important pour EmailJS
+                  name="message" 
                   required
                   rows="4" 
                   placeholder="Votre projet d'alternance..." 
@@ -626,7 +626,7 @@ function Contact() {
 
 function App() {
   return (
-    // On met bg-transparent ici pour voir à travers les particules
+    
     <div className="relative text-white font-sans bg-transparent">
       <AnimatedBackground />
       <Navbar />
