@@ -552,7 +552,7 @@ function Contact() {
                 <a href="https://linkedin.com/in/aymane-allaoui-98571a348" target="_blank" rel="noreferrer" className="px-6 py-3 rounded-xl border border-white/10 bg-white/5 hover:bg-blue-600 hover:text-white transition-all text-xs font-bold uppercase tracking-widest">
                   LinkedIn
                 </a>
-                <a href="https://github.com/tonprofil" target="_blank" rel="noreferrer" className="px-6 py-3 rounded-xl border border-white/10 bg-white/5 hover:bg-white hover:text-black transition-all text-xs font-bold uppercase tracking-widest">
+                <a href="https://github.com/aallao3" target="_blank" rel="noreferrer" className="px-6 py-3 rounded-xl border border-white/10 bg-white/5 hover:bg-white hover:text-black transition-all text-xs font-bold uppercase tracking-widest">
                   GitHub
                 </a>
               </div>
