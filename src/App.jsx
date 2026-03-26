@@ -536,7 +536,7 @@ function Contact() {
               Envie de me <br/> <span className="text-blue-500">Contacter ?</span>
             </h2>
             <p className="text-gray-400 text-xl font-light leading-relaxed mb-10">
-              Je suis actuellement à la recherche d'une **alternance (2026-2027)**. 
+              Je suis actuellement à la recherche d'une alternance (2026-2027). 
               Que ce soit pour discuter d'une opportunité ou simplement en apprendre plus sur moi, ma boîte mail est ouverte.
             </p>
 
