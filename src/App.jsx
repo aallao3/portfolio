@@ -1,7 +1,7 @@
 import AnimatedBackground from "./components/AnimatedBackground";
 import { motion, AnimatePresence } from 'framer-motion';
 import Lottie from "lottie-react";
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import emailjs from '@emailjs/browser';
 
 const fadeInVariant = {
@@ -18,6 +18,7 @@ function Navbar() {
     { name: "Accueil", id: "accueil" },
     { name: "Curriculum Vitae", id: "cv" }, 
     { name: "Projets", id: "projets" },
+    { name: "Reseaux", id: "reseaux" },
     { name: "Compétences", id: "compétences" },
     { name: "Contact", id: "contact" }
   ];
@@ -108,7 +109,7 @@ function Hero() {
         {/* 3. Le Texte descriptif */}
         <motion.p variants={itemVariants} className="text-gray-400 text-lg md:text-2xl max-w-2xl mx-auto leading-relaxed font-light mb-12">
           Étudiant en <span className="text-white font-medium border-b-2 border-blue-500/30">BUT Informatique</span> à l'IUT d'Orsay.<br/>
-          Expertise <span className="text-blue-400 font-medium">Full-Stack</span>,<span className="text-blue-400 font-medium"> Base de données</span>  & <span className="text-blue-400 italic">Systèmes Réseaux</span>.
+          Expertise <span className="text-blue-400 font-medium">Full-Stack</span>,<span className="text-blue-400 font-medium"> Systèmes Réseaux</span>  & <span className="text-blue-400 italic">Base de données</span>.
         </motion.p>
 
         {/* 4. Les Boutons */}
@@ -282,85 +283,317 @@ function Projects() {
     </section>
   );
 }
-
-function Infrastructure() {
+function LowLevelArchitecture() {
   return (
-    <section className="py-24 px-8 bg-blue-600/5 relative overflow-hidden border-y border-white/5">
-      <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-        
+    <section id="architecture" className="py-24 px-8 bg-zinc-950/50 relative overflow-hidden border-b border-white/5">
+      <div className="max-w-7xl mx-auto">
         <motion.div 
-          initial={{ opacity: 0, x: -50 }} 
-          whileInView={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          className="text-center mb-16"
         >
-          <h2 className="text-4xl font-black mb-6 italic text-white uppercase tracking-tighter">
-            Expertise <br/><span className="text-blue-500 text-5xl italic">Systèmes & Réseaux</span>
+          <h2 className="text-4xl md:text-5xl font-black text-white uppercase italic tracking-tighter">
+            Architecture <span className="text-blue-500">Bas Niveau</span>
           </h2>
-          <p className="text-gray-400 mb-8 text-lg leading-relaxed max-w-md">
-            Maîtrise de la configuration complète sous <span className="text-white font-bold">Debian/Linux. </span> 
-            Mise en place de services critiques : <span className="text-blue-400 font-mono">DHCP, DNS, SSH, NAT, VLAN</span> et routage sécurisé
+          <p className="text-gray-500 font-mono text-xs mt-4 uppercase tracking-[0.3em]">
+            Programmation Assembleur & Microarchitecture
           </p>
-          
-          <div className="grid grid-cols-2 gap-4">
-            <div className="p-5 bg-zinc-950/80 rounded-2xl border border-blue-500/20 backdrop-blur-md relative group overflow-hidden">
-              <div className="absolute inset-0 bg-blue-500/5 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
-              <div className="text-blue-500 font-black text-2xl relative z-10">Debian</div>
-              <div className="text-[10px] text-gray-500 uppercase tracking-widest mt-1 relative z-10 font-bold italic">OS de prédilection</div>
-            </div>
-            <div className="p-5 bg-zinc-950/80 rounded-2xl border border-white/5 backdrop-blur-md relative group overflow-hidden">
-               <div className="absolute inset-0 bg-white/5 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
-              <div className="text-gray-300 font-black text-2xl relative z-10">Cisco</div>
-              <div className="text-[10px] text-gray-500 uppercase tracking-widest mt-1 relative z-10 font-bold italic">Configuration & Switch </div>
-            </div>
-          </div>
         </motion.div>
 
-        {/* Animation Réseau Interactive */}
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+          {/* Visualisation de la stack/registres */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            className="bg-black/80 border border-blue-500/20 p-8 rounded-3xl font-mono relative group"
+          >
+            <div className="absolute top-4 right-6 text-[10px] text-blue-500/50">CPU_SIMULATOR_X86_64</div>
+            
+            <div className="space-y-4">
+              {/* Registres */}
+              <div className="grid grid-cols-2 gap-2">
+                <div className="bg-white/5 p-2 rounded border border-white/10">
+                  <span className="text-blue-400 text-[10px]">RAX:</span> <span className="text-white text-xs">0x00000042</span>
+                </div>
+                <div className="bg-white/5 p-2 rounded border border-white/10">
+                  <span className="text-blue-400 text-[10px]">RIP:</span> <span className="text-white text-xs">0x40102A</span>
+                </div>
+              </div>
+
+              {/* Code ASM */}
+              <div className="mt-6 p-4 bg-zinc-900 rounded-xl border border-white/5 text-[13px]">
+                <div className="text-gray-500 text-[11px] mb-2">; Instruction Flow</div>
+                <div className="flex gap-4">
+                  <span className="text-gray-600 italic">401020:</span>
+                  <span className="text-emerald-400">mov</span>
+                  <span className="text-white">rax, 60</span>
+                </div>
+                <div className="flex gap-4">
+                  <span className="text-gray-600 italic">401027:</span>
+                  <span className="text-emerald-400">cmp</span>
+                  <span className="text-white">rbx, rcx</span>
+                </div>
+                <div className="flex gap-4 bg-blue-500/10 border-l-2 border-blue-500 pl-2">
+                  <span className="text-gray-400 italic">40102A:</span>
+                  <span className="text-blue-400">jne</span>
+                  <span className="text-white">_handle_error</span>
+                </div>
+                <div className="flex gap-4 opacity-50">
+                  <span className="text-gray-600 italic">40102F:</span>
+                  <span className="text-emerald-400">syscall</span>
+                </div>
+              </div>
+
+              {/* Illustration Jump */}
+              <div className="flex items-center justify-center gap-4 mt-4">
+                <div className="h-[1px] flex-grow bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-30" />
+                <div className="text-[10px] text-blue-400 uppercase font-black italic">Conditional Jump Triggered</div>
+                <div className="h-[1px] flex-grow bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-30" />
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Texte descriptif */}
+          <div className="space-y-8">
+            <div className="space-y-4">
+              <h3 className="text-xl font-bold text-white flex items-center gap-3">
+                <span className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-xs">01</span>
+                Maîtrise de l'Assembleur (ASM)
+              </h3>
+              <p className="text-gray-400 leading-relaxed pl-11">
+                Étude approfondie des jeux d'instructions x86 et ARM. Capacité à comprendre la manipulation directe des <strong className="text-white">registres</strong>, la gestion de la <strong className="text-white">pile (stack)</strong> et l'optimisation des sauts conditionnels (JMP, JNE, JE).
+              </p>
+            </div>
+
+            <div className="space-y-4">
+              <h3 className="text-xl font-bold text-white flex items-center gap-3">
+                <span className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-xs">02</span>
+                Fonctionnement du Processeur
+              </h3>
+              <p className="text-gray-400 leading-relaxed pl-11">
+                Compréhension du cycle <strong className="text-white">Fetch-Decode-Execute</strong>. Analyse des schémas de processeurs, incluant l'Unité Arithmétique et Logique (ALU), les bus de données et le séquençage des instructions.
+              </p>
+            </div>
+
+            <div className="flex flex-wrap gap-3 pl-11 pt-4">
+              {["x86-64", "ARM", "GPR Registers", "Branch Prediction", "Stack Frames", "OpCodes"].map(tag => (
+                <span key={tag} className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-[10px] font-mono text-gray-500 uppercase">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+function Infrastructure() {
+  const [terminalHistory, setTerminalHistory] = useState([]);
+  const [currentStep, setCurrentStep] = useState(0);
+
+  const scenario = [
+    // --- 1. DIAGNOSTIC (Le réseau est coupé) ---
+    { text: "aymane@debian:~$ ping 8.8.8.8 -c 2", delay: 2000 },
+    { text: "PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.", delay: 800 },
+    { text: "From 192.168.1.1 icmp_seq=1 Destination Net Unreachable", delay: 1200 },
+    { text: "From 192.168.1.1 icmp_seq=2 Destination Net Unreachable", delay: 1500 },
+    { text: "aymane@debian:~$ ip link show", delay: 1800 },
+    { text: "2: eth0: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN", delay: 1000 },
+
+    // --- 2. RÉPARATION COUCHE 2 (VLAN & Bridge) ---
+    { text: "aymane@debian:~$ sudo ip link set eth0 up", delay: 1500 },
+    { text: "aymane@debian:~$ sudo vconfig add eth0 10", delay: 2000 },
+    { text: "[ OK ] VLAN 10 (PROD) created and UP.", delay: 1000 },
+    { text: "aymane@debian:~$ brctl addbr br0 && brctl addif br0 eth0.10", delay: 2000 },
+    { text: "[ INFO ] Bridge br0 linked to VLAN 10 (Layer 2 Isolation)", delay: 1200 },
+
+    // --- 3. CONFIGURATION COUCHE 3 (IP & Gateway) ---
+    { text: "aymane@debian:~$ ip addr add 192.168.10.1/24 dev br0", delay: 1800 },
+    { text: "aymane@debian:~$ ip route add default via 192.168.10.254", delay: 2000 },
+    { text: "[ SYS ] Default gateway set to 192.168.10.254 (Static Routing)", delay: 1200 },
+
+    // --- 4. SERVICES (DHCP, DNS & SSH) ---
+    { text: "aymane@debian:~$ systemctl restart isc-dhcp-server", delay: 1500 },
+    { text: "aymane@debian:~$ named-checkconf /etc/bind/named.conf.local", delay: 1800 },
+    { text: "[ OK ] DNS Zone 'infra.local' valid (UDP/53).", delay: 1000 },
+    { text: "aymane@debian:~$ ssh-keygen -t ed25519 -C 'admin_key'", delay: 2200 },
+    { text: "aymane@debian:~$ sudo ufw allow 22/tcp && sudo ufw allow 53/udp", delay: 2000 },
+    { text: "[ FW ] Firewall: SSH (TCP) and DNS (UDP) OPEN.", delay: 1200 },
+
+    // --- 5. VÉRIFICATION FINALE (Ça marche !) ---
+    { text: "aymane@debian:~$ ping 8.8.8.8 -c 2", delay: 2000 },
+    { text: "64 bytes from 8.8.8.8: icmp_seq=1 ttl=118 time=14.2 ms", delay: 800 },
+    { text: "64 bytes from 8.8.8.8: icmp_seq=2 ttl=118 time=13.5 ms", delay: 2000 },
+    
+    { text: "aymane@debian:~$ clear", delay: 3000 },
+  ];
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      const currentLine = scenario[currentStep];
+
+      if (currentLine.text.includes("clear")) {
+        setTerminalHistory([]);
+      } else {
+        setTerminalHistory((prev) => [...prev, currentLine]);
+      }
+
+      setCurrentStep((prev) => (prev + 1) % scenario.length);
+    }, scenario[currentStep].delay);
+
+    return () => clearTimeout(timer);
+  }, [currentStep]);
+
+  return (
+    <section id="reseaux" className="py-24 px-8 bg-black relative overflow-hidden border-y border-white/5">
+      {/* Effet de scanline (fond d'écran technique) */}
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(59,130,246,0.03),rgba(0,255,0,0.01),rgba(0,0,255,0.03))] bg-[length:100%_2px,3px_100%] pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center relative z-10">
+        
+        {/* Texte de gauche */}
+        <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
+  <div className="inline-block px-3 py-1 border border-blue-500/30 bg-blue-500/10 text-blue-400 text-xs font-mono mb-4 rounded-full">
+    STATUS: INFRA_OPERATIONAL
+  </div>
+  
+  <h2 className="text-5xl font-black mb-6 italic text-white uppercase tracking-tighter leading-none">
+    Expertise <br/>
+    <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600 italic">
+      Systèmes & Réseaux
+    </span>
+  </h2>
+
+  <div className="space-y-6 text-gray-400 text-[14px] leading-relaxed max-w-xl">
+    <p>
+      Administration réseau sous <strong className="text-white font-bold">Debian</strong>, avec une bonne compréhension du cheminement d’un paquet réseau, depuis son arrivée sur une interface jusqu’à son routage, son filtrage ou sa traduction d’adresse.
+    </p>
+
+    <div className="grid grid-cols-1 gap-6 mt-8">
+      {/* Routage */}
+      <div className="group">
+        <h3 className="text-white font-bold flex items-center gap-2 mb-2">
+          <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shadow-[0_0_8px_#3b82f6]" />
+          Routage statique & passerelles
+        </h3>
+        <p className="pl-4 border-l border-white/10">
+          Configuration de l’adressage IPv4, des passerelles par défaut et des routes statiques afin d’assurer la communication entre plusieurs sous-réseaux. Analyse des tables de routage et vérification de la connectivité entre machines à l’aide d’outils comme <strong className="text-white font-bold">ping</strong>, <strong className="text-white font-bold">ip route</strong>, <strong className="text-white font-bold">links</strong> ou <strong className="text-white font-bold">dig</strong>.
+        </p>
+      </div>
+
+      {/* Filtrage */}
+      <div className="group">
+        <h3 className="text-white font-bold flex items-center gap-2 mb-2">
+          <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shadow-[0_0_8px_#3b82f6]" />
+          Filtrage de paquets avec Netfilter / iptables
+        </h3>
+        <p className="pl-4 border-l border-white/10">
+          Mise en place de règles de pare-feu avec <strong className="text-white font-bold">iptables</strong> sur les chaînes INPUT, OUTPUT et FORWARD. Configuration de politiques par défaut, autorisation ou blocage de flux TCP, UDP et ICMP, gestion des connexions ESTABLISHED/RELATED, distinction entre <strong className="text-white font-bold">DROP</strong> et <strong className="text-white font-bold">REJECT</strong>, et journalisation des paquets avec LOG et limit.
+        </p>
+      </div>
+
+      {/* NAT */}
+      <div className="group">
+        <h3 className="text-white font-bold flex items-center gap-2 mb-2">
+          <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shadow-[0_0_8px_#3b82f6]" />
+          Translation d’adresses : NAT, SNAT, DNAT et Masquerading
+        </h3>
+        <p className="pl-4 border-l border-white/10">
+          Configuration de la table nat avec les chaînes POSTROUTING et PREROUTING. Mise en place de <strong className="text-white font-bold">MASQUERADE</strong> pour masquer les adresses d’un réseau interne, de <strong className="text-white font-bold">SNAT</strong> pour imposer une adresse source précise, et de <strong className="text-white font-bold">DNAT</strong> pour rediriger des connexions vers une machine ou un port interne. Tests réalisés avec tcpdump et netcat.
+        </p>
+      </div>
+
+      {/* Commutation */}
+      <div className="group">
+        <h3 className="text-white font-bold flex items-center gap-2 mb-2">
+          <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shadow-[0_0_8px_#3b82f6]" />
+          Commutation virtuelle : bridges Linux
+        </h3>
+        <p className="pl-4 border-l border-white/10">
+          Création de ponts réseau Linux avec <strong className="text-white font-bold">brctl</strong> afin de relier plusieurs interfaces au niveau couche 2. Configuration d’une interface bridge br0, ajout d’interfaces physiques, activation du pont, attribution d’une adresse IP au bridge et vérification de la connectivité entre machines. Utilisation d’<strong className="text-white font-bold">ebtables</strong> pour filtrer le trafic au niveau Ethernet selon les adresses MAC.
+        </p>
+      </div>
+
+      {/* Services */}
+      <div className="group">
+        <h3 className="text-white font-bold flex items-center gap-2 mb-2">
+          <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shadow-[0_0_8px_#3b82f6]" />
+          Services réseau : DNS et HTTP
+        </h3>
+        <p className="pl-4 border-l border-white/10">
+          Tests de résolution DNS avec <strong className="text-white font-bold">dig</strong>, interrogation de serveurs DNS cache sur le port UDP 53, vérification de services HTTP avec <strong className="text-white font-bold">links</strong>, manipulation de ports web standards et alternatifs comme 80, 8080 et 8118. Mise en place d’un proxy HTTP avec <strong className="text-white font-bold">Privoxy</strong> dans un contexte de proxy transparent.
+        </p>
+      </div>
+    </div>
+  </div>
+  
+  {/* Badges / Grille du bas */}
+  <div className="flex flex-wrap gap-2 mt-10 mb-8">
+    {["iptables", "NAT/SNAT/DNAT", "Linux Bridges", "ebtables", "DNS (dig)", "TCPDump"].map((tool) => (
+      <span key={tool} className="px-3 py-1 bg-white/5 border border-white/10 rounded-md text-[11px] font-mono text-gray-300">
+        {tool}
+      </span>
+    ))}
+  </div>
+
+  <div className="grid grid-cols-2 gap-4">
+    <div className="p-5 bg-zinc-900/50 rounded-2xl border border-blue-500/40 backdrop-blur-md relative overflow-hidden group">
+      <div className="text-blue-500 font-black text-2xl italic">Debian</div>
+      <div className="text-[10px] text-gray-400 uppercase tracking-widest mt-1 font-bold italic">Systèmes & Administration</div>
+    </div>
+    
+    <div className="p-5 bg-zinc-900/50 rounded-2xl border border-white/10 backdrop-blur-md relative overflow-hidden group">
+      <div className="text-gray-300 font-black text-2xl italic text-white">Netfilter</div>
+      <div className="text-[10px] text-gray-400 uppercase tracking-widest mt-1 font-bold italic">Réseaux & Sécurité</div>
+    </div>
+  </div>
+</motion.div>
+
+        {/* Terminal Réaliste */}
         <motion.div 
           initial={{ scale: 0.9, opacity: 0 }} 
           whileInView={{ scale: 1, opacity: 1 }}
-          className="relative aspect-square flex items-center justify-center rounded-3xl bg-black/40 border border-white/5"
+          className="relative aspect-video flex flex-col rounded-xl bg-zinc-950 border border-white/10 shadow-2xl overflow-hidden font-mono"
         >
-          {/* Grille de fond type Cyberpunk */}
-          <div className="absolute inset-0 opacity-10 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
-          
-          <div className="absolute inset-0 flex items-center justify-center">
-             {/* Cercles d'ondes de signal */}
-             {[1, 2, 3].map((i) => (
-                <motion.div
-                  key={i}
-                  className="absolute border border-blue-500/30 rounded-full"
-                  initial={{ width: 100, height: 100, opacity: 0.5 }}
-                  animate={{ width: 400, height: 400, opacity: 0 }}
-                  transition={{ repeat: Infinity, duration: 4, delay: i * 1.2, ease: "easeOut" }}
-                />
-             ))}
+          {/* Header du Terminal */}
+          <div className="bg-zinc-900 px-4 py-2 flex gap-2 items-center border-b border-white/5">
+            <div className="w-3 h-3 rounded-full bg-red-500/50" />
+            <div className="w-3 h-3 rounded-full bg-yellow-500/50" />
+            <div className="w-3 h-3 rounded-full bg-green-500/50" />
+            <span className="text-[10px] text-gray-500 ml-2 italic">root@aymane-infra:~</span>
           </div>
 
-          <div className="relative z-10 flex flex-col items-center">
-            {/* Icône de transmission animée */}
-            <div className="flex gap-4 mb-8">
-               {[0, 1, 2].map((i) => (
-                 <motion.div 
-                   key={i}
-                   animate={{ y: [0, -10, 0], backgroundColor: ["#1e293b", "#3b82f6", "#1e293b"] }}
-                   transition={{ repeat: Infinity, duration: 1.5, delay: i * 0.2 }}
-                   className="w-3 h-12 rounded-full shadow-[0_0_15px_rgba(59,130,246,0.3)]"
-                 />
-               ))}
-            </div>
+          {/* Corps du Terminal */}
+          <div className="p-6 text-[12px] sm:text-[13px] h-full flex flex-col justify-start gap-1 overflow-y-auto">
+            {terminalHistory.map((line, index) => (
+              <div 
+                key={index}
+                className={`whitespace-pre-wrap ${
+                  line.text.includes('[ OK ]') ? "text-emerald-400" : 
+                  line.text.includes('[') ? "text-blue-400" : "text-gray-300"
+                }`}
+              >
+                {line.text}
+              </div>
+            ))}
             
-            <div className="font-mono text-[10px] text-blue-400 mb-2 tracking-[0.3em] uppercase animate-pulse">
-              &lt;packet_transmission_active /&gt;
+            {/* Ligne active avec curseur */}
+            <div className="text-emerald-500 whitespace-pre-wrap">
+              {scenario[currentStep].text.includes("clear") ? "" : scenario[currentStep].text}
+              <motion.span 
+                animate={{ opacity: [1, 0] }} 
+                transition={{ repeat: Infinity, duration: 0.8 }}
+                className="inline-block w-2 h-4 bg-white ml-1 translate-y-1" 
+              />
             </div>
-            <h3 className="text-4xl font-black text-white tracking-widest">NETWORK</h3>
-            <div className="mt-4 flex gap-2">
-               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
-               <span className="text-[9px] font-mono text-emerald-500/80">SYSTEM_ONLINE</span>
+
+            <div className="mt-auto opacity-30 text-[10px] text-gray-500 border-t border-white/5 pt-4">
+              [SYS_LOG] NETWORK_STACK: MONITORING...
             </div>
           </div>
         </motion.div>
-        
       </div>
     </section>
   );
@@ -448,7 +681,7 @@ function CVPreview() {
             {/* Overlay au survol */}
             <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                <a 
-                href="/CV_Aymane_Allaoui.pdf" 
+                href="/CV_Aymane_Allaoui_Cyber.pdf" 
                 download 
                 className="p-4 bg-white text-black rounded-full shadow-xl transform scale-75 group-hover:scale-100 transition-transform"
                >
@@ -474,7 +707,7 @@ function CVPreview() {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
             <a 
-              href="/CV_Aymane_Allaoui.pdf" 
+              href="/CV_Aymane_Allaoui_Cyber.pdf" 
               download 
               className="px-10 py-5 bg-blue-600 hover:bg-blue-500 text-white font-black rounded-2xl transition-all shadow-lg shadow-blue-500/20 flex items-center justify-center gap-3 uppercase tracking-widest text-sm"
             >
@@ -635,6 +868,7 @@ function App() {
         <CVPreview/>
         <Projects />
         <Infrastructure />
+        <LowLevelArchitecture />
         <Skills />
         <Contact />
       </main>
