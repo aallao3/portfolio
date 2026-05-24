@@ -134,8 +134,8 @@ function Projects() {
       title: "Application de Gestion de Stock",
       client: "Projet Technique",
       description: "Système centralisé de suivi des stocks avec contrôle d'accès et traçabilité des flux.",
-      details: "Conception d'une application de gestion des stocks et inventaires avec authentification sécurisée. Implémentation d'une logique de rôles utilisateurs (Admin, Gestionnaire, Observateur) pour restreindre les privilèges d'écriture sur la base de données. Optimisation des requêtes SQL pour le suivi des mouvements d'articles en temps réel et génération de rapports d'état.",
-      tech: ["Python", "Django", "SQL", "TailwindCSS"],
+      details: "Conception et développement en autonomie complète d'une application découplée pour numériser la gestion empirique du matériel. Modélisation d'une base de données relationnelle SQLite articulée autour des produits, des emplacements physiques (box, cave) et de l'historique complet des mouvements. Backend robuste exposant des API REST sécurisées avec contrôles de cohérence côté serveur — toute sortie ou transfert dépassant le stock disponible est automatiquement refusé. Frontend React modulaire avec design system dark/light mode, graphiques Recharts, recherche globale partagée via Context API et notifications temps réel.",
+      tech: ["Python", "Django REST Framework", "SQLite", "React.js", "Vite", "Recharts", "Axios"],
       images: [
         "/img/Gestion 1.png", 
         "/img/Gestion 2.png",
