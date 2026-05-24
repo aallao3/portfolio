@@ -131,6 +131,20 @@ function Projects() {
 
   const projects = [
     {
+      title: "Application de Gestion de Stock",
+      client: "Projet Technique",
+      description: "Système centralisé de suivi des stocks avec contrôle d'accès et traçabilité des flux.",
+      details: "Conception d'une application de gestion des stocks et inventaires avec authentification sécurisée. Implémentation d'une logique de rôles utilisateurs (Admin, Gestionnaire, Observateur) pour restreindre les privilèges d'écriture sur la base de données. Optimisation des requêtes SQL pour le suivi des mouvements d'articles en temps réel et génération de rapports d'état.",
+      tech: ["Python", "Django", "SQL", "TailwindCSS"],
+      images: [
+        "/img/Gestion 1.png", 
+        "/img/Gestion 2.png",
+        "/img/Gestion 3.png",
+        "/img/Gestion 4.png",
+        "/img/Gestion 5.png"
+      ] 
+    },
+    {
       title: "Application Médicale Intelligente",
       client: "Cabinet Médical",
       description: "Optimisation de l'accueil patient avec système d'appel automatique.",
